@@ -2,6 +2,7 @@
 # https://www.geeksforgeeks.org/get-post-requests-using-python/
 # https://docs.0x.org/0x-api-orderbook/api-references/get-orderbook-v1
 # https://stackoverflow.com/questions/13142347/how-to-remove-leading-and-trailing-zeros-in-a-string-python
+#{"from":"from_currency", "to": "to_currency","exchange_rate":<rate> } 
 
 import requests
 
@@ -31,20 +32,27 @@ r = requests.get(url = URL)
 data = r.json()
 fromToken = data["bids"]["records"][0]["order"]["makerToken"]
 toToken = data["bids"]["records"][0]["order"]["takerToken"]
+fromTokenAmountRaw = data["bids"]["records"][0]["order"]["makerAmount"]
 fromTokenAmount = int(data["bids"]["records"][0]["order"]["makerAmount"].rstrip("0"))
+toTokenAmountRaw = data["bids"]["records"][0]["order"]["takerAmount"].rstrip("0")
 toTokenAmount = int(data["bids"]["records"][0]["order"]["takerAmount"].rstrip("0"))
 exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
 
-'''
+
 print(fromToken)
 print(toToken)
+print(fromTokenAmountRaw)
 print(fromTokenAmount)
+print(toTokenAmountRaw)
 print(toTokenAmount)
 print(exchangeRate)
-print(data)
-'''
+#print(data)
+
 
 def getBidRate(quoteToken, baseToken):
+	'''
+	Fetches only the first bid value
+	'''
 	URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quoteToken, base=baseToken)
 	r = requests.get(url = URL)
 	data = r.json()
@@ -62,6 +70,9 @@ def getBidRate(quoteToken, baseToken):
 	return output
 
 def getAskRate(quoteToken, baseToken):
+	'''
+	Fetches only the first ask value
+	'''
 	URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quoteToken, base=baseToken)
 	r = requests.get(url = URL)
 	data = r.json()
@@ -91,10 +102,3 @@ Order Book APIS
 https://docs.cryptowat.ch/rest-api/markets/order-book 
 https://tiao.io/post/exploring-the-binance-cryptocurrency-exchange-api-orderbook/ 
 '''
-
-
-#{"from":"from_currency", "to": "to_currency","exchange_rate":<rate> } 
-
-
-#get USD()
-#get ETH():
