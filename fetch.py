@@ -4,6 +4,7 @@
 # https://stackoverflow.com/questions/13142347/how-to-remove-leading-and-trailing-zeros-in-a-string-python
 # {"from":"from_currency", "to": "to_currency","exchange_rate":<rate> } 
 # https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API?from=etop#get-token-info
+#https://docs.0x.org/0x-api-orderbook/api-references#signed-order
 
 import requests
 
@@ -14,24 +15,12 @@ USDC = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
 testA = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
 testB = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
 
-#baseToken = WETH 
-#quoteToken = USDT 
-
-#baseToken = USDT
-#quoteToken = WETH 
-
-baseToken = USDC
-quoteToken = WETH 
-
-#baseToken = testA
-#quoteToken = testB 
-
+base = USDC
+quote = WETH 
 
 tokenURL = "https://api.ethplorer.io/getTokenInfo/{token}?apiKey=freekey"
 
-
-
-URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quoteToken, base=baseToken)
+URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quote, base=base)
 #URL = "https://api.0x.org/sra/v4/orders?page=3&perPage=20"
 r = requests.get(url = URL)
 data = r.json()
@@ -43,7 +32,7 @@ toTokenAmountRaw = data["bids"]["records"][0]["order"]["takerAmount"].rstrip("0"
 toTokenAmount = int(data["bids"]["records"][0]["order"]["takerAmount"].rstrip("0"))
 exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
 
-
+'''
 print(fromToken)
 print(toToken)
 print(fromTokenAmountRaw)
@@ -51,17 +40,16 @@ print(fromTokenAmount)
 print(toTokenAmountRaw)
 print(toTokenAmount)
 print(exchangeRate)
+'''
 #print(data)
 ethplorerKey = "EK-w5S5E-dZCXjb9-uSqWJ"
-quoteTokenURL = "https://api.ethplorer.io/getTokenInfo/{token}?apiKey={key}".format(token=quoteToken, key=ethplorerKey)
-#quoteTokenURL = "https://kovan-api.ethplorer.io/getTokenInfo/{token}?apiKey=freekey".format(token=quoteToken)
+quoteTokenURL = "https://api.ethplorer.io/getTokenInfo/{token}?apiKey={key}".format(token=quote, key=ethplorerKey)
 
 
 r = requests.get(url = quoteTokenURL)
 data = r.json()
-print("QUOTE")
-#print(data)
-print(data["decimals"])
+#print("QUOTE")
+#print(data["decimals"])
 
 def getBidRate(quoteToken, baseToken):
 	'''
@@ -77,9 +65,6 @@ def getBidRate(quoteToken, baseToken):
 	r = requests.get(url = baseTokenURL)
 	data = r.json()
 	baseDecimals = int(data["decimals"])
-	#print(quoteDecimals)
-	#print(baseDecimals)
-
 
 	URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quoteToken, base=baseToken)
 	r = requests.get(url = URL)
@@ -92,14 +77,12 @@ def getBidRate(quoteToken, baseToken):
 	toToken = data["bids"]["records"][0]["order"]["takerToken"]
 	fromTokenAmount = int(data["bids"]["records"][0]["order"]["makerAmount"]) # "12312341200000000000000" ~ 1231.23412
 	toTokenAmount = int(data["bids"]["records"][0]["order"]["takerAmount"])
-	#print(fromTokenAmount)
-	#print(toTokenAmount)
+
 	fromTokenAmount = fromTokenAmount / (10 ** quoteDecimals)
 	toTokenAmount = toTokenAmount / (10 ** baseDecimals)
-	#print(fromTokenAmount)
-	#print(toTokenAmount)
+
 	exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
-	#print(fromTokenAmount/toTokenAmount)
+
 	output = {"from":fromToken, "to": toToken,"exchange_rate":exchangeRate}
 	return output
 
@@ -117,8 +100,6 @@ def getAskRate(quoteToken, baseToken):
 	r = requests.get(url = baseTokenURL)
 	data = r.json()
 	baseDecimals = int(data["decimals"])
-	#print(quoteDecimals)
-	#print(baseDecimals)
 
 	URL = "https://api.0x.org/orderbook/v1?quoteToken={quote}&baseToken={base}&page=1&perPage=1".format(quote=quoteToken, base=baseToken)
 	r = requests.get(url = URL)
@@ -130,14 +111,11 @@ def getAskRate(quoteToken, baseToken):
 	toToken = data["asks"]["records"][0]["order"]["takerToken"]
 	fromTokenAmount = int(data["asks"]["records"][0]["order"]["makerAmount"])#.rstrip("0"))
 	toTokenAmount = int(data["asks"]["records"][0]["order"]["takerAmount"])#.rstrip("0"))
-	#print(fromTokenAmount)
-	#print(toTokenAmount)
+
 	fromTokenAmount = fromTokenAmount / (10 ** baseDecimals)
 	toTokenAmount = toTokenAmount / (10 ** quoteDecimals)
-	#print(fromTokenAmount)
-	#print(toTokenAmount)
+
 	exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
-	#print(fromTokenAmount/toTokenAmount)
 	output = {"from":fromToken, "to": toToken,"exchange_rate":exchangeRate}
 	return output
 
@@ -145,9 +123,6 @@ def getExchangeRate(tokenA, tokenB):
 	'''
 	Value of tokenA in tokenB
 	'''
-	#print(getBidRate(USDC, WETH) == getAskRate(USDC, WETH))
-	#print(getAskRate(tokenA, tokenB) == getBidRate(tokenB, tokenA))
-	#return getAskRate(tokenA, tokenB)
 	askRate = getAskRate(tokenA, tokenB)
 	bidRate = getBidRate(tokenB, tokenA)
 	if askRate == "NO ASK AVAILABLE" and bidRate == "NO BID AVAILABLE":
@@ -170,8 +145,6 @@ print(getExchangeRate(WETH, WBTC))
 #print(getAskRate(USDC, WETH))
 #print(getBidRate(USDC, WBTC))
 #print(getAskRate(USDC, WBTC))
-
-#convertAtoB
 
 '''
 Interactive orderbook (e.g. EtherDelta, Binance)
