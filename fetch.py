@@ -7,7 +7,7 @@
 #https://docs.0x.org/0x-api-orderbook/api-references#signed-order
 
 import requests
-from contants import *
+from constants import *
 
 base = USDC
 quote = WETH 
@@ -75,7 +75,7 @@ def getBidRate(quoteToken, baseToken):
 	fromTokenAmount = fromTokenAmount / (10 ** quoteDecimals)
 	toTokenAmount = toTokenAmount / (10 ** baseDecimals)
 
-	exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
+	exchangeRate = float(float(toTokenAmount) / float(fromTokenAmount))
 
 	output = {"from":fromToken, "to": toToken,"exchange_rate":exchangeRate}
 	return output
@@ -109,7 +109,7 @@ def getAskRate(quoteToken, baseToken):
 	fromTokenAmount = fromTokenAmount / (10 ** baseDecimals)
 	toTokenAmount = toTokenAmount / (10 ** quoteDecimals)
 
-	exchangeRate = float(float(fromTokenAmount) / float(toTokenAmount))
+	exchangeRate = float(float(toTokenAmount) / float(fromTokenAmount))
 	output = {"from":fromToken, "to": toToken,"exchange_rate":exchangeRate}
 	return output
 
@@ -127,8 +127,8 @@ def getExchangeRate(tokenA, tokenB):
 		return askRate
 	
 
-print(getExchangeRate(WETH, USDC))
-print(getExchangeRate(USDC, WETH))
+# print(getExchangeRate(WETH, USDC))
+# print(getExchangeRate(USDC, WETH))
 # print(getExchangeRate(WBTC, USDC))
 # print(getExchangeRate(USDC, WBTC))
 # print(getExchangeRate(WBTC, WETH))
