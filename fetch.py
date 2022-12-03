@@ -5,6 +5,7 @@
 # {"from":"from_currency", "to": "to_currency","exchange_rate":<rate> } 
 # https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API?from=etop#get-token-info
 #https://docs.0x.org/0x-api-orderbook/api-references#signed-order
+#https://ethplorer.io/wallet
 
 import requests
 
