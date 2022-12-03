@@ -16,13 +16,17 @@ def arb(fromToken, toToken, source, limit):
 		if bidRate * (1 - transaction_cost) - order * (1 + transaction_cost) > 0:
 			arb_count += 1
 
-	arb_opportunity = float(arb_count) / limit
+	arb_opportunity = float(arb_count) / len(orders)
 
-	print(f"0x bid rate: {bidRate}, 1inch: {orders}, count: {len(orders)}")
+	print(f"0x bid rate: {bidRate}, 1inch count: {len(orders)}")
 	print(f"arb_count: {arb_count}, arb_opportunity: {arb_opportunity}")
 
-	return arb_opportunity
+	return arb_count, len(orders), arb_opportunity
 
 	
-arb(USDC, WETH, ethereum, limit)
-
+arb(USDC, MATIC, ethereum, limit)
+# arb(USDC, BNB, ethereum, limit)
+# arb(USDC, WETH, ethereum, limit)
+# arb(USDT, WETH, ethereum, limit)
+# arb(USDC, WBTC, ethereum, limit)
+#arb(binance_USDC, binance_PETH, binance, limit)

@@ -21,8 +21,8 @@ def fetch(takerAsset, makerAsset, source=1, limit=10):
 
 	orders = []
 	for exchange in exchanges:
-		fromToken = address_currency_dict[exchange["data"]["makerAsset"]]
-		toToken = address_currency_dict[exchange["data"]["takerAsset"]]
+		# fromToken = address_currency_dict[exchange["data"]["makerAsset"]]
+		# toToken = address_currency_dict[exchange["data"]["takerAsset"]]
 		exchange_rate = float(exchange["makerRate"]) / (10**12)
 		# output = {"from":fromToken, "to": toToken, "exchange_rate":exchange_rate} 
 		# print(output)
@@ -34,7 +34,7 @@ def fetch(takerAsset, makerAsset, source=1, limit=10):
 
 
 def main():
-	fetch(USDC, WETH, ethereum)
+	fetch(USDC, BNB, ethereum)
 	# fetch(binance_PETH, binance_USDC, binance)
 	#fetch(polygon_WBTC, polygon_USDC, polygon)
 	# fetch(optimism_WBTC, optimism_USDC, optimism)
