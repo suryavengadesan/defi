@@ -7,13 +7,7 @@
 #https://docs.0x.org/0x-api-orderbook/api-references#signed-order
 
 import requests
-
-WBTC = "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
-USDT = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-USDC = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-testA = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
-testB = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+from contants import *
 
 base = USDC
 quote = WETH 
@@ -73,8 +67,8 @@ def getBidRate(quoteToken, baseToken):
 	if (len(data["bids"]["records"]) == 0):
 		return "NO BID AVAILABLE"
 
-	fromToken = data["bids"]["records"][0]["order"]["makerToken"]
-	toToken = data["bids"]["records"][0]["order"]["takerToken"]
+	fromToken = address_currency_dict[data["bids"]["records"][0]["order"]["makerToken"]]
+	toToken = address_currency_dict[data["bids"]["records"][0]["order"]["takerToken"]]
 	fromTokenAmount = int(data["bids"]["records"][0]["order"]["makerAmount"]) # "12312341200000000000000" ~ 1231.23412
 	toTokenAmount = int(data["bids"]["records"][0]["order"]["takerAmount"])
 
@@ -107,8 +101,8 @@ def getAskRate(quoteToken, baseToken):
 	if (len(data["asks"]["records"]) == 0):
 		return "NO ASK AVAILABLE"
 
-	fromToken = data["asks"]["records"][0]["order"]["makerToken"]
-	toToken = data["asks"]["records"][0]["order"]["takerToken"]
+	fromToken = address_currency_dict[data["asks"]["records"][0]["order"]["makerToken"]]
+	toToken = address_currency_dict[data["asks"]["records"][0]["order"]["takerToken"]]
 	fromTokenAmount = int(data["asks"]["records"][0]["order"]["makerAmount"])#.rstrip("0"))
 	toTokenAmount = int(data["asks"]["records"][0]["order"]["takerAmount"])#.rstrip("0"))
 
@@ -135,16 +129,10 @@ def getExchangeRate(tokenA, tokenB):
 
 print(getExchangeRate(WETH, USDC))
 print(getExchangeRate(USDC, WETH))
-print(getExchangeRate(WBTC, USDC))
-print(getExchangeRate(USDC, WBTC))
-print(getExchangeRate(WBTC, WETH))
-print(getExchangeRate(WETH, WBTC))
-#print(getBidRate(WETH, USDC))
-#print(getAskRate(WETH, USDC))
-#print(getBidRate(USDC, WETH))
-#print(getAskRate(USDC, WETH))
-#print(getBidRate(USDC, WBTC))
-#print(getAskRate(USDC, WBTC))
+# print(getExchangeRate(WBTC, USDC))
+# print(getExchangeRate(USDC, WBTC))
+# print(getExchangeRate(WBTC, WETH))
+# print(getExchangeRate(WETH, WBTC))
 
 '''
 Interactive orderbook (e.g. EtherDelta, Binance)
