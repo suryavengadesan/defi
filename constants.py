@@ -38,4 +38,4 @@ address_currency_dict = {
 transaction_cost = 0.02
 
 # Order limit number
-limit = 100
+limit = 500

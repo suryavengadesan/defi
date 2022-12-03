@@ -23,7 +23,7 @@ def fetch(takerAsset, makerAsset, source=1, limit=10):
 	for exchange in exchanges:
 		fromToken = address_currency_dict[exchange["data"]["makerAsset"]]
 		toToken = address_currency_dict[exchange["data"]["takerAsset"]]
-		exchange_rate = float(exchange["makerRate"]) * 10**12
+		exchange_rate = float(exchange["makerRate"]) / (10**12)
 		# output = {"from":fromToken, "to": toToken, "exchange_rate":exchange_rate} 
 		# print(output)
 		orders.append(exchange_rate)
