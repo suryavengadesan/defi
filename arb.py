@@ -24,9 +24,9 @@ def arb(fromToken, toToken, source, limit):
 	return arb_count, len(orders), arb_opportunity
 
 	
-arb(USDC, MATIC, ethereum, limit)
+#arb(USDC, MATIC, ethereum, limit)
 # arb(USDC, BNB, ethereum, limit)
-# arb(USDC, WETH, ethereum, limit)
+arb(USDC, WETH, ethereum, limit)
 # arb(USDT, WETH, ethereum, limit)
 # arb(USDC, WBTC, ethereum, limit)
 #arb(binance_USDC, binance_PETH, binance, limit)
