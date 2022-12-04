@@ -42,10 +42,9 @@ def fetch(makerAsset, takerAsset, source=1, limit=10):
 
 
 def main():
-	# result = fetch(USDC, WETH, ethereum)
-	result = fetch(USDC, WBTC, ethereum)
-	# result = fetch(WETH, USDC, ethereum)
-	# fetch(USDC, BNB, ethereum)
+	result = fetch(WETH, USDC, ethereum)
+	# result = fetch(WBTC, USDC, ethereum)
+	# result = fetch(BNB, USDC, ethereum)
 	# fetch(binance_PETH, binance_USDC, binance)
 	#fetch(polygon_WBTC, polygon_USDC, polygon)
 	# fetch(optimism_WBTC, optimism_USDC, optimism)
