@@ -1,5 +1,7 @@
 # Defi Arbitrage Bot
 
+![](bot.png)
+
 ## Execution Steps: 
 1. Determine current price of token from public order book
 2. Find limit order of token on decentralized exchanges
