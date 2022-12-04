@@ -15,16 +15,15 @@ Latency of arbitrage
 Successful order ratio (arbitrage order/all order)
 
 ## Expectation:
-<60 second detection  
-\>5% successful arbitrage orders 
+1. <60 second detection  
+2. \>5% successful arbitrage orders 
 
 ## Results:
-<5 second detection
-0-50% successful arbitrage orders 
+1. <5 second detection
+2. 0-50% successful arbitrage orders 
 
 ## Takeaway:
-Arbitrage opportunity varies widely based on token
-Off-chain requests have high latency overhead 
+1. Arbitrage opportunity varies widely based on token 
 
 ## Contributors
 
