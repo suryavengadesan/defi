@@ -11,8 +11,8 @@
 Ethplorer API (Tokens), 0x API (Orderbook), 1inch API (DEX)
 
 ## Key Metrics: 
-Latency of arbitrage
-Successful order ratio (arbitrage order/all order)
+1. Latency of arbitrage
+2. Successful order ratio (arbitrage order/all order)
 
 ## Expectation:
 1. <60 second detection  
