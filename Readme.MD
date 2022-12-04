@@ -14,7 +14,7 @@ Successful order ratio (arbitrage order/all order)
 
 ## Expectation:
 <60 second detection  
->5% successful arbitrage orders 
+\>5% successful arbitrage orders 
 
 ## Results:
 <5 second detection
