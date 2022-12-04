@@ -5,6 +5,7 @@
 # {"from":"from_currency", "to": "to_currency","exchange_rate":<rate> } 
 # https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API?from=etop#get-token-info
 #https://docs.0x.org/0x-api-orderbook/api-references#signed-order
+#https://ethplorer.io/wallet
 
 import requests
 from constants import *
@@ -67,6 +68,7 @@ def getBidRate(quoteToken, baseToken):
 	if (len(data["bids"]["records"]) == 0):
 		return "NO BID AVAILABLE"
 
+	print(data["bids"]["records"][0]["order"]["makerToken"])
 	fromToken = address_currency_dict[data["bids"]["records"][0]["order"]["makerToken"]]
 	toToken = address_currency_dict[data["bids"]["records"][0]["order"]["takerToken"]]
 	fromTokenAmount = int(data["bids"]["records"][0]["order"]["makerAmount"]) # "12312341200000000000000" ~ 1231.23412
@@ -119,6 +121,8 @@ def getExchangeRate(tokenA, tokenB):
 	'''
 	askRate = getAskRate(tokenA, tokenB)
 	bidRate = getBidRate(tokenB, tokenA)
+	print(askRate)
+	print(bidRate)
 	if askRate == "NO ASK AVAILABLE" and bidRate == "NO BID AVAILABLE":
 		return "NO EXCHANGE"
 	elif askRate == "NO ASK AVAILABLE": 
@@ -127,7 +131,12 @@ def getExchangeRate(tokenA, tokenB):
 		return askRate
 	
 
-# print(getExchangeRate(WETH, USDC))
+#print(getExchangeRate(WETH, USDC))
+#print(getExchangeRate(WETH, BNB))
+#print(getExchangeRate(USDC, WBTC))
+print(getExchangeRate(USDC, MATIC))
+print(getExchangeRate(MATIC, USDC))
+
 # print(getExchangeRate(USDC, WETH))
 # print(getExchangeRate(WBTC, USDC))
 # print(getExchangeRate(USDC, WBTC))
