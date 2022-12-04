@@ -68,7 +68,7 @@ def getBidRate(quoteToken, baseToken):
 	if (len(data["bids"]["records"]) == 0):
 		return "NO BID AVAILABLE"
 
-	print(data["bids"]["records"][0]["order"]["makerToken"])
+	# print(data["bids"]["records"][0]["order"]["makerToken"])
 	fromToken = address_currency_dict[data["bids"]["records"][0]["order"]["makerToken"]]
 	toToken = address_currency_dict[data["bids"]["records"][0]["order"]["takerToken"]]
 	fromTokenAmount = int(data["bids"]["records"][0]["order"]["makerAmount"]) # "12312341200000000000000" ~ 1231.23412

@@ -9,7 +9,7 @@ def arb(fromToken, toToken, source, limit):
 	#					buy toToken at 1inch
 	# Step 2: 1inch WETH -> USDC
 	#					sell toToken at 0x
-	print(f"arb fromToken: {address_currency_dict[fromToken]} toToken {address_currency_dict[toToken]}")
+	# print(f"arb fromToken: {address_currency_dict[fromToken]} toToken {address_currency_dict[toToken]}")
 	bidRate = getBidRate(toToken, fromToken)["exchange_rate"]
 	orders = fetch(toToken, fromToken, source, limit)
 
@@ -22,8 +22,8 @@ def arb(fromToken, toToken, source, limit):
 
 	arb_opportunity = float(arb_count) / len(orders)
 
-	print(f"0x bid rate: {bidRate}, 1inch count: {len(orders)}")
-	print(f"arb_count: {arb_count}, arb_opportunity: {arb_opportunity}")
+	# print(f"0x bid rate: {bidRate}, 1inch count: {len(orders)}")
+	# print(f"arb_count: {arb_count}, arb_opportunity: {arb_opportunity}")
 
 	return arb_count, len(orders), arb_opportunity
 
