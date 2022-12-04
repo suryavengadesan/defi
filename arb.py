@@ -6,10 +6,13 @@ from constants import *
 def arb(fromToken, toToken, source, limit):
 	# 
 	# Step 1: 0x ETH/USDC get the bid price 
+	#					buy toToken at 1inch
 	# Step 2: 1inch WETH -> USDC
-	bidRate = getBidRate(fromToken, toToken)["exchange_rate"]
+	#					sell toToken at 0x
+	bidRate = getBidRate(toToken, fromToken)["exchange_rate"]
 	orders = fetch(toToken, fromToken, source, limit)
 
+	print(orders)
 	arb_count = 0 
 	#compare the exchange rate and find the arb opportunity
 	for order in orders:
@@ -23,8 +26,10 @@ def arb(fromToken, toToken, source, limit):
 
 	return arb_count, len(orders), arb_opportunity
 
-	
+
 #arb(USDC, MATIC, ethereum, limit)
+arb(USDC, MATIC, ethereum, limit)
+# arb(BNB, USDC, ethereum, limit)
 # arb(USDC, BNB, ethereum, limit)
 arb(USDC, WETH, ethereum, limit)
 # arb(USDT, WETH, ethereum, limit)
