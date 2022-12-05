@@ -1,6 +1,6 @@
 # Defi Arbitrage Bot
 
-![](bot.png)
+![](/media/bot.png)
 
 ## Execution Steps: 
 1. Determine current price of token from public order book
@@ -22,7 +22,7 @@ Ethplorer API (Tokens), 0x API (Orderbook), 1inch API (DEX)
 1. <5 second detection
 2. 10-50% successful arbitrage orders 
 
-![](dist.png)
+![](/media/dist.png)
 
 ## Takeaway:
 1. Arbitrage opportunity varies widely based on token 
