@@ -22,6 +22,8 @@ Ethplorer API (Tokens), 0x API (Orderbook), 1inch API (DEX)
 1. <5 second detection
 2. 0-50% successful arbitrage orders 
 
+![](dist.png)
+
 ## Takeaway:
 1. Arbitrage opportunity varies widely based on token 
 
