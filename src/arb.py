@@ -14,18 +14,23 @@ def arb(fromToken, toToken, source, limit):
 	orders = fetch(toToken, fromToken, source, limit)
 
 	# print(orders)
-	arb_count = 0 
+	arb_count = 0
+	total_profit = 0
+	total_cost = 0 
 	#compare the exchange rate and find the arb opportunity
 	for order in orders:
 		if bidRate * (1 - transaction_cost) - order * (1 + transaction_cost) > 0:
 			arb_count += 1
+			total_profit += bidRate * (1 - transaction_cost) - order * (1 + transaction_cost)
+			total_cost += order * (1 + transaction_cost)
 
 	arb_opportunity = float(arb_count) / len(orders)
+	profit_rate = float(total_profit) / total_cost if total_cost > 0 else 0
 
 	# print(f"0x bid rate: {bidRate}, 1inch count: {len(orders)}")
-	# print(f"arb_count: {arb_count}, arb_opportunity: {arb_opportunity}")
+	print(f"arb_count: {arb_count}, arb_opportunity: {arb_opportunity}, profit_rate: {profit_rate}")
 
-	return arb_count, len(orders), arb_opportunity
+	return arb_count, len(orders), arb_opportunity, profit_rate
 
 def main():
 	### WETH
