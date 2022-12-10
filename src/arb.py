@@ -85,7 +85,7 @@ def main():
 	arb(USDC, WBTC, ethereum, limit)
 	arb(USDC, BNB, ethereum, limit)
 	# arb(USDC, MATIC, ethereum, limit)
-	arb(USDC, SHIBA, ethereum, limit)
+	# arb(USDC, SHIBA, ethereum, limit)
 
 	### USDT
 	arb(USDT, USDC, ethereum, limit)
